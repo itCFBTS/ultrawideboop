@@ -13,8 +13,8 @@ settings, but nothing shows the battery at a glance. This fills that gap.
 
 > Not affiliated with or endorsed by SteelSeries. Protocol reverse-engineered from USB
 > captures of GG Web; tested on a Sensei Pro, firmware 2.14.1. The Rival Pro and the Mini
-> models share the same UWB platform but are untested and likely use different USB IDs;
-> reports welcome. For older (non-UWB) SteelSeries mice, see
+> models share the same UWB platform but are untested and may report different USB IDs
+> (see below). For older (non-UWB) SteelSeries mice, see
 > [rivalcfg](https://github.com/flozz/rivalcfg).
 
 ## Have a Rival Pro, Rival Pro Mini or Sensei Pro Mini?
