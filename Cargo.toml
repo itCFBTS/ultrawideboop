@@ -5,10 +5,6 @@ edition = "2024"
 description = "Read-only status tool for SteelSeries UWB mice (Sensei Pro / Rival Pro) on Linux"
 license = "MIT"
 
-[[bin]]
-name = "sensei-info"
-path = "src/main.rs"
-
 [dependencies]
 libc = "0.2"
 

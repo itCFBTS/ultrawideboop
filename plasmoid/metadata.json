@@ -3,7 +3,7 @@
     "KPlugin": {
         "Authors": [{ "Name": "itCFBTS" }],
         "Category": "System Information",
-        "Description": "Battery levels of the SteelSeries Sensei Pro mouse and its base station (polls sensei-info)",
+        "Description": "Battery levels of the SteelSeries Sensei Pro mouse and its base station (polls ultrawideboop)",
         "Icon": "input-mouse",
         "Id": "org.local.senseibattery",
         "Name": "Sensei Battery",

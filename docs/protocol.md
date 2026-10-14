@@ -30,7 +30,7 @@ settings were changed during the sniff).
 | `0xaa` | unknown (5-entry table ending 0x30) | keybinds/LED? unconfirmed |
 | `0xbc`, `0xc3`, `0xc4`, `0xa5`, `0x98`, `0x9a` | queried by GG, empty/ack responses | — |
 
-## Write opcodes (observed 2026-10-13; documented only — sensei-info never sends writes)
+## Write opcodes (observed 2026-10-13; documented only — ultrawideboop never sends writes)
 
 | Opcode | Meaning |
 |---|---|
@@ -48,7 +48,7 @@ Max Performance does not touch the profile table (no `0xad` write seen). Read-ba
 - "9k overpolling" (GG's Level-5 label) is radio-hop oversampling; it is not a host-visible
   rate or a readable field. USB delivers at most 8000 Hz (125 µs interval). Its measurable
   signature would be unusually uniform inter-report intervals (few/no 250 µs doubled gaps).
-- **Validated live 2026-10-12** with `sensei-info`: all decoded fields match GG Web's display. Command channel = the hidraw node of USB interface 02 (probe-verified).
+- **Validated live 2026-10-12** with `ultrawideboop`: all decoded fields match GG Web's display. Command channel = the hidraw node of USB interface 02 (probe-verified).
 - Capture hygiene: capture file deleted after analysis; `usbmon` module unloaded.
 
 ## Wheel characteristics (measured 2026-10-12/13, evdev, FW 2.14.1)
@@ -61,7 +61,7 @@ Max Performance does not touch the profile table (no `0xad` write seen). Read-ba
   breaks it, and it stays broken in every 8K-UWB profile (L2–L5) until the receiver is
   unplugged/replugged. L1 is fine even while latched. Reproduced repeatedly (~20 min on
   scrolltest.net); not port- or OS-related (reboot/port change only "fixed" it via the replug).
-  Also reproduced 2026-10-13 with NO host software talking to the mouse (sensei-info disabled,
+  Also reproduced 2026-10-13 with NO host software talking to the mouse (ultrawideboop disabled,
   GG Web closed) — the trigger is purely the base-station button.
 - Earlier observation (before the latch was understood): **The wheel's throughput is profile-dependent — the 8K profile strangles it (likely a firmware
   bug; reported to SteelSeries 2026-10-13):** peak flick rate at L5 (8000/8000) = 3–4 detents/0.5 s; at

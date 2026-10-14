@@ -1,4 +1,4 @@
-//! sensei-info — print everything we understand about the SteelSeries Sensei Pro (1038:1880).
+//! ultrawideboop — print everything we understand about the SteelSeries Sensei Pro (1038:1880).
 //!
 //! Sends the six READ opcodes SteelSeries GG Web issues on connect (fw, serial, batteries,
 //! DPI table, polling profiles, sleep timer) over hidraw and decodes the responses.
@@ -75,7 +75,7 @@ fn main() {
             "--verbose" | "-v" => verbose = true,
             "--battery" | "-b" => battery_only = true,
             "-h" | "--help" => {
-                println!("sensei-info — read-only status of the SteelSeries Sensei Pro\n");
+                println!("ultrawideboop — read-only status of SteelSeries UWB mice (Sensei Pro)\n");
                 println!("  --battery, -b   print only \"<mouse%> <base%>\" (single query; for scripts/widgets)");
                 println!("  --serial, -s    also print the device serial number (never shown otherwise)");
                 println!("  --verbose, -v   also show firmware, all DPI stages, all poll profiles,");
@@ -182,8 +182,8 @@ fn main() {
     }
     if verbose {
         match query(&mut f, 0x9B) {
-            Some(r) => println!("max performance: {}", if r[2] == 1 { "on" } else { "off" }),
-            None => println!("max performance: no reply"),
+            Some(r) => println!("max perf      : {}", if r[2] == 1 { "on" } else { "off" }),
+            None => println!("max perf      : no reply"),
         }
         match query(&mut f, 0xA9) {
             Some(r) => {

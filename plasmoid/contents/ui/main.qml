@@ -1,4 +1,4 @@
-// Sensei Battery — tray widget polling `sensei-info` (read-only queries, same as GG/Solaar do).
+// Sensei Battery — tray widget polling `ultrawideboop` (read-only queries, same as GG/Solaar do).
 // Tray number: cheap single-query poll every 5 min. Popup: full query on open/refresh.
 import QtQuick
 import QtQuick.Layouts
@@ -22,7 +22,7 @@ PlasmoidItem {
     property string err: "querying…"
 
     // Runs through /bin/sh; Plasma's PATH often lacks the per-user bin dirs.
-    readonly property string binPath: 'PATH="$HOME/.local/bin:$HOME/.cargo/bin:$PATH" sensei-info'
+    readonly property string binPath: 'PATH="$HOME/.local/bin:$HOME/.cargo/bin:$PATH" ultrawideboop'
     readonly property string cmdBattery: binPath + " --battery"
     readonly property string cmdFull: binPath + " -v"
     readonly property bool low: mouseBat >= 0 && mouseBat <= 15
@@ -35,7 +35,7 @@ PlasmoidItem {
             disconnectSource(source)
             const out = data["stdout"] || ""
             if (data["exit code"] === 127) {
-                root.err = "sensei-info not installed"
+                root.err = "ultrawideboop not installed"
                 return
             }
             if (data["exit code"] !== 0) {
@@ -75,7 +75,7 @@ PlasmoidItem {
         root.pollLevels = pm
             ? pm[1].trim().split(/\s+/).map(t => ({ active: t.startsWith("["), label: t.replace(/[\[\]]/g, "") }))
             : []
-        const mp = out.match(/max performance\s*:\s*(on|off)/)
+        const mp = out.match(/max perf(?:ormance)?\s*:\s*(on|off)/)
         root.maxPerf = mp ? mp[1] : ""
         root.err = mb ? "" : "no data"
         root.lastUpdate = new Date().toLocaleTimeString(Qt.locale(), "hh:mm")
