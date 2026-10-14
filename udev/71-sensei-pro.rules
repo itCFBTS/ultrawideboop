@@ -1,0 +1,4 @@
+# SteelSeries Sensei Pro base station (1038:1880): let the logged-in user open its hidraw
+# nodes, so sensei-info (and GG Web in Chrome) work without sudo.
+# Install: sudo cp 71-sensei-pro.rules /etc/udev/rules.d/ && sudo udevadm control --reload && sudo udevadm trigger
+KERNEL=="hidraw*", ATTRS{idVendor}=="1038", ATTRS{idProduct}=="1880", TAG+="uaccess"

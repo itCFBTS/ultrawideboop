@@ -1,0 +1,16 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Authors": [{ "Name": "itCFBTS" }],
+        "Category": "System Information",
+        "Description": "Battery levels of the SteelSeries Sensei Pro mouse and its base station (polls sensei-info)",
+        "Icon": "input-mouse",
+        "Id": "org.local.senseibattery",
+        "Name": "Sensei Battery",
+        "Version": "1.0",
+        "License": "MIT",
+        "Website": "https://github.com/itCFBTS/ultrawideboop"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0",
+    "X-Plasma-NotificationAreaCategory": "Hardware"
+}
