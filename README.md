@@ -17,6 +17,18 @@ settings, but nothing shows the battery at a glance. This fills that gap.
 > reports welcome. For older (non-UWB) SteelSeries mice, see
 > [rivalcfg](https://github.com/flozz/rivalcfg).
 
+## Have a Rival Pro, Rival Pro Mini or Sensei Pro Mini?
+
+Only the Sensei Pro's base station (`1038:1880`) is recognised so far. If you own another
+model, you can help add it. With the base station plugged in, run:
+
+```bash
+lsusb | grep -i steelseries
+```
+
+Then [open an issue](https://github.com/itCFBTS/ultrawideboop/issues/new) with the
+`1038:xxxx` line and your model name. If it's a new ID, support is usually a one-line change.
+
 ## Read-only by design
 
 `ultrawideboop` only sends the read queries GG Web itself sends when it connects
