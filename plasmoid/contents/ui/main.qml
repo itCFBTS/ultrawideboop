@@ -43,11 +43,11 @@ PlasmoidItem {
                 return
             }
             if (source === root.cmdBattery) {
-                const m = out.trim().match(/^(\d+)\s+(\d+)$/)
+                const m = out.trim().match(/^(\d+|-)\s+(\d+)$/)
                 if (m) {
-                    root.mouseBat = parseInt(m[1])
+                    root.mouseBat = m[1] === "-" ? -1 : parseInt(m[1])
                     root.baseBat = parseInt(m[2])
-                    root.err = ""
+                    root.err = m[1] === "-" ? "no battery in mouse" : ""
                     root.lastUpdate = new Date().toLocaleTimeString(Qt.locale(), "hh:mm")
                 } else {
                     root.err = "no battery data"
@@ -60,8 +60,9 @@ PlasmoidItem {
 
     function parseFull(out) {
         const mb = out.match(/mouse battery\s*:\s*(\d+)%/)
+        const mouseOut = /mouse battery\s*:\s*none/.test(out)
         const bb = out.match(/base battery\s*:\s*(\d+)%/)
-        if (mb) root.mouseBat = parseInt(mb[1])
+        root.mouseBat = mb ? parseInt(mb[1]) : -1
         if (bb) root.baseBat = parseInt(bb[1])
         const fw = out.match(/firmware\s*:\s*(\S+)/)
         root.firmware = fw ? fw[1] : ""
@@ -77,7 +78,7 @@ PlasmoidItem {
             : []
         const mp = out.match(/max perf(?:ormance)?\s*:\s*(on|off)/)
         root.maxPerf = mp ? mp[1] : ""
-        root.err = mb ? "" : "no data"
+        root.err = mb ? "" : (mouseOut ? "no battery in mouse" : "no data")
         root.lastUpdate = new Date().toLocaleTimeString(Qt.locale(), "hh:mm")
     }
 

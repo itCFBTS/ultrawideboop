@@ -4,7 +4,8 @@ A gentle, read-only boop for your **SteelSeries Ultra-Wideband (UWB)** mouse on 
 battery and settings readout for the Sensei Pro (and, likely, the Rival Pro and the Minis).
 
 - **`ultrawideboop`** — a small CLI that reads the mouse and base station over hidraw:
-  battery levels, firmware, DPI stages, polling profiles, Max Performance, sleep timer.
+  mouse and base-station battery levels, firmware, DPI stages, polling
+  profiles, Max Performance, sleep timer.
 - **Sensei Battery** — a KDE Plasma 6 widget (system tray or panel) built on top of it.
 
 SteelSeries GG's desktop app doesn't run on Linux. GG Web works in Chrome for changing
@@ -62,9 +63,12 @@ poll profiles : L1:1000/1000  L2:1000/8000  L3:2000/8000  L4:4000/8000  [L5:8000
 max perf      : off
 sleep timer   : 300 s
 
-$ ultrawideboop --battery      # single query, for scripts
+$ ultrawideboop --battery      # single query, for scripts: <mouse%> <base%>
 67 100
 ```
+
+While you're swapping batteries (no battery in the mouse) the mouse reads `none` / `-`,
+and an empty base-station slot reads 0%.
 
 `--serial` / `-s` also prints the serial number (hidden by default so output is safe to share).
 

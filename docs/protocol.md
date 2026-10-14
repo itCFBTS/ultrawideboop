@@ -18,7 +18,7 @@ settings were changed during the sniff).
 
 | Opcode | Meaning | Response layout (after `op 00`) |
 |---|---|---|
-| `0x92` | **Batteries** | byte2 = mouse % (0x54=84), byte3 = status/flags (01 seen; suspect charging bits — unconfirmed), byte4 = base-station % (0x64=100) |
+| `0x92` | **Batteries** | byte2 = mouse battery % (0x54=84; **0xFF = no reading**, seen mid-swap with no battery in the mouse), byte3 = status (01 normal, 00 while the mouse had no battery — likely "mouse connected"), byte4 = base-station battery % (the swappable battery docked in the base; 0x64=100; 0 while the slot was empty). Confirmed 2026-10-13 by a battery swap: mouse 42 / base 100 → (FF, 0) during the swap → mouse 100 / base 39 |
 | `0x90` | **Firmware version** | ASCII string ("2.14.1") |
 | `0xb0` | **Serial number** | ASCII string (arg byte 0/1 seen; both returned same serial) |
 | `0xb4` | **DPI table** | `count, active_idx` then count × 6-byte stages: X u16-LE, Y u16-LE, 2 unknown bytes (`03 03` observed; flags/color?). 0190=400, 0320=800, 0640=1600, 0960=2400, 0C80=3200. Active idx 0-based (04 = 3200 = red LED). Stride verified live 2026-10-12 |

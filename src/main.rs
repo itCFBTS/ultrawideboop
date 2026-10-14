@@ -76,7 +76,8 @@ fn main() {
             "--battery" | "-b" => battery_only = true,
             "-h" | "--help" => {
                 println!("ultrawideboop — read-only status of SteelSeries UWB mice (Sensei Pro)\n");
-                println!("  --battery, -b   print only \"<mouse%> <base%>\" (single query; for scripts/widgets)");
+                println!("  --battery, -b   print only \"<mouse%> <base%>\" (single query; for scripts/widgets);");
+                println!("                  mouse is \"-\" while no battery is in the mouse");
                 println!("  --serial, -s    also print the device serial number (never shown otherwise)");
                 println!("  --verbose, -v   also show firmware, all DPI stages, all poll profiles,");
                 println!("                  sleep timer, battery status byte and the hidraw node");
@@ -116,7 +117,8 @@ fn main() {
         exit(1);
     };
     if battery_only {
-        println!("{} {}", first[2], first[4]);
+        let mouse = if first[2] == 0xFF { "-".to_string() } else { first[2].to_string() };
+        println!("{mouse} {}", first[4]);
         return;
     }
     if verbose {
@@ -131,12 +133,16 @@ fn main() {
     }
     match query(&mut f, 0x92) {
         Some(r) => {
+            // 0xFF = no reading: no battery in the mouse (mid-swap) or mouse not connected.
+            let mouse = if r[2] == 0xFF { "none (battery out / mouse not connected)".to_string() } else { format!("{}%", r[2]) };
             if verbose {
-                println!("mouse battery : {}%   (status byte {:#04x})", r[2], r[3]);
+                println!("mouse battery : {mouse}   (status byte {:#04x})", r[3]);
             } else {
-                println!("mouse battery : {}%", r[2]);
+                println!("mouse battery : {mouse}");
             }
-            println!("base battery  : {}%", r[4]);
+            // Byte 4 reads 0 while the base station's battery slot is empty.
+            let base = if r[4] == 0 { "0% (or slot empty)".to_string() } else { format!("{}%", r[4]) };
+            println!("base battery  : {base}");
         }
         None => println!("batteries     : no reply"),
     }
